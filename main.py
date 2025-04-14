@@ -8,24 +8,31 @@
 
 import random
 
-# class for name stuff
 class nameobj:
+    """stores rank, name, and number of births"""
     count = 0
 
     def __init__(self, r, n, b):
+        """init w/ rank (int), name (str), births (int)"""
         self.rank = int(r)
         self.name = n
         self.births = int(b)
         nameobj.count += 1
 
     def __gt__(self, other):
+        """returns true if this name is more popular"""
         return self.births > other.births
 
     def __lt__(self, other):
+        """returns true if this name is less popular"""
         return self.births < other.births
 
-# reads file
 def load_names(file):
+    """
+    reads names from txt file
+    input: file name (str)
+    output: list of nameobj
+    """
     lst = []
     try:
         with open(file, 'r') as f:
@@ -37,8 +44,12 @@ def load_names(file):
         print('something went wrong with the file')
     return lst
 
-# ask question
 def ask(q1, q2):
+    """
+    asks user to choose which name is more popular
+    input: two nameobj instances
+    output: bool, True if guess is correct
+    """
     print(f'in 2015, was the name {q1.name} (1) or {q2.name} (2) more popular (enter 1 or 2)? ', end='')
     ans = input().strip()
     while ans not in ['1', '2']:
@@ -79,4 +90,4 @@ print('thanks for playing!')
 if total > 0:
     print(f'you answered {round(correct/total*100,1)}% correct')
 else:
-    print('you didn’t even try bro')
+    print("you didn’t even try bro")
